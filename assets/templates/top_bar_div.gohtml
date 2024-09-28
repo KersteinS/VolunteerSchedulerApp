@@ -1,0 +1,68 @@
+{{define "schedule_selector_options"}}
+<option value="new-schedule"></option>
+{{ $cs := .Current_schedule }}
+{{range $element := .Saved_schedules }}
+<option value="{{ $element }}" {{if eq $element $cs }}selected{{end}}>{{ $element }}</option>
+{{end}}
+{{ if .Allow_copy }}<option value="copy-current-schedule">Copy Current Schedule...</option>{{end}}
+{{end}}
+
+{{define "schedule_selector"}}
+<label id="schedule-select-label" for="schedule-select" class="schedule-label">Select Schedule:
+    <select id="schedule-select" name="schedule-selection" hx-get="/select-schedule" hx-include="[name='schedule-name']"
+        hx-target="body">
+        {{template "schedule_selector_options" . }}
+    </select>
+</label>
+{{end}}
+
+{{define "schedule_delete_btn"}}
+<button id="schedule-delete-btn" type="button" hx-get="/delete-schedule" hx-include="[name='schedule-selection']" hx-target="body">
+    <img class="trashcan" src="images/trashcan.png" alt="trashcan">
+</button>
+{{end}}
+
+{{define "schedule_namer"}}
+<label id="schedule-name-label" for="set-schedule-name" class="schedule-label">Schedule Name:
+    <input id="set-schedule-name" value="{{ . }}" name="schedule-name" type="text" required>
+</label>
+{{end}}
+
+{{define "top_bar"}}<div id="top-bar">
+    <form id="schedule-name-form" hx-post="/save-parameters" hx-target="body"
+        hx-include="#volunteer-column, #schedule-constraints">
+        {{template "schedule_selector" . }}
+        {{template "schedule_delete_btn"}}
+        {{template "schedule_namer" .Current_schedule }}
+    </form>
+    <form id="schedule-constraints">
+        <label id="min-date-label" for="min-date-input" class="date-label">Schedule start date:<input
+                id="min-date-input" name="min-date" class="date-limiter" type="date" placeholder="mm/dd/yyyy"
+                value="{{ .Min_date }}"></label>
+        <label id="max-date-label" for="max-date-input" class="date-label">Schedule end date:<input id="max-date-input"
+                name="max-date" class="date-limiter" type="date" placeholder="mm/dd/yyyy"
+                value="{{ .Max_date }}"></label>
+        <label for="Su" id="Su-label" class="weekday-label"><input id="Su" value="Su" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Sunday}}checked{{end}}>Sunday</label>
+        <label for="Mo" id="Mo-label" class="weekday-label"><input id="Mo" value="Mo" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Monday}}checked{{end}}>Monday</label>
+        <label for="Tu" id="Tu-label" class="weekday-label"><input id="Tu" value="Tu" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Tuesday}}checked{{end}}>Tuesday</label>
+        <label for="We" id="We-label" class="weekday-label"><input id="We" value="We" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Wednesday}}checked{{end}}>Wednesday</label>
+        <label for="Th" id="Th-label" class="weekday-label"><input id="Th" value="Th" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Thursday}}checked{{end}}>Thursday</label>
+        <label for="Fr" id="Fr-label" class="weekday-label"><input id="Fr" value="Fr" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Friday}}checked{{end}}>Friday</label>
+        <label for="Sa" id="Sa-label" class="weekday-label"><input id="Sa" value="Sa" name="weekday"
+                class="weekday-limiter" type="checkbox" {{if .Volunteer_days.Saturday}}checked{{end}}>Saturday</label>
+        <label for="shifts-off-counter" id="shifts-off-label">Shifts off before being scheduled again:<input
+                name="shifts-off" id="shifts-off-counter" type="number" min="0"
+                value="{{ if ne .Shifts_off -1}}{{.Shifts_off}}{{end}}"></label>
+        <label for="per-shift-counter" id="per-shift-label">Volunteers per shift:<input name="per-shift"
+                id="per-shift-counter" type="number" min="1"
+                value="{{ if  ne .Volunteers_per_shift -1 }}{{.Volunteers_per_shift}}{{end}}"></label>
+    </form>
+    <div id="username">Signed in as: {{.User}}.</div>
+</div>
+{{end}}

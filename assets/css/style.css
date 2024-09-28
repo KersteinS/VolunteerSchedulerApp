@@ -1,0 +1,277 @@
+* {
+    font-size: 40px;
+}
+
+#overall-layout {
+    display: grid;
+    /*grid-template-columns: 2fr 3fr;*/
+    gap: 10px;
+    grid-template-areas:
+        "top-bar top-bar"
+        "left-column right-column";
+    margin: 1%;
+}
+
+#top-bar {
+    grid-area: top-bar;
+    width: 100%;
+    justify-self: center;
+    font-size: 20px;
+    margin-bottom: 5px;
+    gap: inherit;
+    display: grid;
+    grid-template-areas:
+        "schedule-name-form username"
+        "schedule-constraints .";
+}
+
+#left-column {
+    /*grid-column: 1;
+    grid-row: auto;*/
+    grid-area: left-column;
+    margin: 1%;
+    font-size: 30px;
+    justify-self: left;
+    height: 100%;
+}
+
+#right-column {
+    /*grid-column: 2;
+    grid-row: auto;*/
+    grid-area: right-column;
+    margin: 1%;
+    justify-self: center;
+    display: grid;
+    gap: inherit;
+    grid-template-areas:
+        "gen-schedule-btn save-schedule-btn"
+        "schedule-table schedule-table";
+    height: min-content;
+}
+
+#username {
+    font-size: inherit;
+    grid-area: username;
+    justify-self: right;
+}
+
+#schedule-name-form {
+    font-size: inherit;
+    gap: inherit;
+    display: grid;
+    grid-area: schedule-name-form;
+    grid-template-areas:
+    "schedule-select-label schedule-delete-btn"
+    "schedule-name-label schedule-delete-btn";
+    grid-auto-columns: 1fr 3fr; /*this is bad and barely works*/
+}
+
+#schedule-select-label {
+    min-width: 100px;
+    grid-area: schedule-select-label;
+}
+
+#schedule-delete-btn {
+    gap: inherit;
+    grid-area: schedule-delete-btn;
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: middle;
+    width: fit-content;
+    justify-self: left;
+    padding: 0px;
+    margin-right: 5px;
+    max-height: 40px;
+}
+
+#schedule-delete-btn .trashcan {
+    width: auto;
+    height: auto;
+    max-height: 35px;
+    vertical-align: middle;
+    justify-self: left;
+}
+
+#schedule-name-label {
+    grid-area: schedule-name-label;
+}
+
+#schedule-select-label select,
+#schedule-select-label select option,
+#schedule-name-label input {
+    min-width: inherit;
+    font-size: inherit;
+}
+
+#schedule-constraints {
+    justify-self: left;
+    font-size: inherit;
+    grid-area: schedule-constraints;
+    gap: 5px;
+    display: grid;
+    grid-template-areas:
+        "min-date-label min-date-label max-date-label max-date-label"
+        "Su-label Mo-label Tu-label We-label"
+        "Th-label Fr-label Sa-label ."
+        "shifts-off-label shifts-off-label shifts-off-label ."
+        "per-shift-label per-shift-label per-shift-label .";
+}
+
+.schedule-label {
+    justify-self: left;
+    font-size: inherit;
+}
+
+.date-limiter {
+    font-size: inherit;
+    width: 7em;
+    margin-left: 5px;
+}
+
+.date-label {
+    font-size: inherit;
+}
+
+.weekday-limiter {
+    font-size: inherit;
+    margin-right: 5px;
+}
+
+.weekday-label {
+    font-size: inherit;
+}
+
+#Su-label {
+    grid-area: Su-label;
+}
+
+#Mo-label {
+    grid-area: Mo-label;
+}
+
+#Tu-label {
+    grid-area: Tu-label;
+}
+
+#We-label {
+    grid-area: We-label;
+}
+
+#Th-label {
+    grid-area: Th-label;
+}
+
+#Fr-label {
+    grid-area: Fr-label;
+}
+
+#Sa-label {
+    grid-area: Sa-label;
+}
+
+#max-date-label {
+    grid-area: max-date-label;
+}
+
+#min-date-label {
+    grid-area: min-date-label;
+}
+
+#shifts-off-counter {
+    font-size: inherit;
+    grid-area: shifts-off-counter;
+    width: 3em;
+    margin-left: 5px;
+}
+
+#shifts-off-label {
+    font-size: inherit;
+    grid-area: shifts-off-label;
+}
+
+#per-shift-counter {
+    font-size: inherit;
+    grid-area: shifts-off-counter;
+    width: 3em;
+    margin-left: 5px;
+}
+
+#per-shift-label {
+    font-size: inherit;
+    grid-area: per-shift-label;
+}
+
+#volunteer-column {
+    overflow-y: scroll;
+    font-size: inherit;
+    height: min-content;
+    max-height: 55vh;
+}
+
+.volunteer-entry {
+    font-size: inherit;
+}
+
+.volunteer-entry .ve-name {
+    display: inline-block;
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+.volunteer-entry .ve-delete {
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: middle;
+    width: fit-content;
+    padding: 0px;
+    margin-right: 5px;
+}
+
+.volunteer-entry .ve-delete .trashcan {
+    width: auto;
+    height: auto;
+    max-height: 35px;
+    vertical-align: middle;
+}
+
+.volunteer-entry .ve-unavailable {
+    display: block;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+#save-volunteers-button {
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+}
+
+.schedule-btn {
+    margin: 2px;
+    width: fit-content;
+    justify-self: center;
+}
+
+#gen-schedule-btn {
+    grid-area: gen-schedule-btn;
+}
+
+#save-schedule-btn {
+    grid-area: save-schedule-btn;
+}
+
+#schedule-table {
+    grid-area: schedule-table;
+    border: 2px solid black;
+    width: fit-content;
+    border-collapse: collapse;
+}
+
+#schedule-table th,
+td {
+    padding: 5px;
+    border: thin solid black;
+    text-align: center;
+}

@@ -1,0 +1,5 @@
+build\ and\ run.bat
+go.sum
+*.exe
+*.db*
+*.ods

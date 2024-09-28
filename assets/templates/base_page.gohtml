@@ -1,0 +1,24 @@
+{{block "top_bar" .}}<div id="top-bar">Top Bar goes here.</div>{{end}}
+{{block "left_column" .}}<div id="left-column">Left Column goes here.</div>{{end}}
+{{block "right_column" .}}<div id="right-column">Right Column goes here.</div>{{end}}
+{{define "base_page"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Volunteer Scheduler App</title>
+    <script src="scripts/htmx.1.9.12.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head>
+
+<body>
+    <div id="overall-layout">
+        {{template "top_bar" .Top_bar}}
+        {{ template "left_column" .Left_column }}
+        {{ template "right_column" .Right_column }}
+    </div>
+</body>
+
+</html>
+{{end}}

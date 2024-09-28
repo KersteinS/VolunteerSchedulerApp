@@ -1,0 +1,26 @@
+{{define "table_row"}}<tr>
+    <th scope="row">XX/YY/ZZ</th>
+    <td>Guy1</td>
+    <td>Guy2</td>
+    <td>Guy3</td>
+</tr>
+{{end}}
+{{define "schedule_table"}}<table id="schedule-table">
+    <tr>
+        <th></th>
+        <th scope="col">Volunteer 1</th>
+        <th scope="col">Volunteer 2</th>
+        <th scope="col">Volunteer 3</th>
+    </tr>
+    {{range .Num_weeks}}
+    <!--is this the wrong thing to loop over (number of volunteers instead of number of weeks)?-->
+    {{template "table_row"}}
+    {{end}}
+</table>
+{{end}}
+{{define "right_column"}}<div id="right-column">
+    <button id="gen-schedule-btn" class="schedule-btn" type="button">Generate Schedule</button>
+    <button id="save-schedule-btn" class="schedule-btn" type="button">Save Schedule</button>
+    {{template "schedule_table" . }}
+</div>
+{{end}}

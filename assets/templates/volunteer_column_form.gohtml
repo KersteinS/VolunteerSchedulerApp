@@ -1,0 +1,38 @@
+{{define "ve_name"}}<input name="ve{{.IdIndex}}-n" type="text" class="ve-name" placeholder="Name" , value="{{.Name}}"
+	hx-get="/mod-volunteers?IdIndex={{.IdIndex}}" hx-trigger="change" hx-target="#volunteer-column" hx-swap="beforeend"
+	hx-include="[class=ve-name]">{{end}}
+
+{{define "ve_delete"}}<button id="ve{{.IdIndex}}-d" class="ve-delete" type="button"
+	hx-get="/mod-volunteers?IdIndex={{.IdIndex}}" hx-target="#ve{{.IdIndex}}" hx-swap="outerHTML"
+	hx-include="[class=ve-name]"><img class="trashcan" src="images/trashcan.png" alt="trashcan"></button>
+{{end}}
+
+{{define "ve_unavailable"}}
+{{end}}
+
+{{define "ve_unavailable_single_blank"}}<input name="ve{{.IdIndex}}-u" type="date" class="ve-unavailable"
+	placeholder="mm/dd/yyyy" hx-get="/add-unavailability?IdIndex={{.IdIndex}}"
+	hx-target="#ve{{.IdIndex}}" hx-swap="beforeend" hx-include="[name='ve{{.IdIndex}}-u']">
+{{end}}
+
+{{define "ve_unavailable_set"}}
+{{ $idindex := .IdIndex }}
+{{ range $element := .Dates }}<input name="ve{{$idindex}}-u" type="date" class="ve-unavailable" placeholder="mm/dd/yyyy"
+	value="{{ $element }}" hx-get="/add-unavailability?IdIndex={{$idindex}}" hx-target="#ve{{$idindex}}"
+	hx-swap="beforeend" hx-include="[name='ve{{$idindex}}-u']">
+{{end}}
+{{ template "ve_unavailable_single_blank" . }}
+{{end}}
+
+{{define "volunteer_entry"}}<div id="ve{{.IdIndex}}" class="volunteer-entry">
+	{{template "ve_name" . }} {{template "ve_delete" . }}
+	{{ template "ve_unavailable_set" . }}
+</div>
+{{end}}
+
+{{define "volunteer_column"}}<form id="volunteer-column">
+	{{range $element := .}}
+	{{template "volunteer_entry" $element }}
+	{{end}}
+</form>
+{{end}}

@@ -1,0 +1,6 @@
+{{block "volunteer_column" . }}Volunteer Column goes here.{{end}}
+{{define "left_column"}}<div id="left-column">
+    {{ template "volunteer_column" .Volunteer_column }}
+    <button id="save-volunteers-button" type="submit" form="schedule-name-form">{{if .Existing_schedule}}Update{{else}}Save{{end}} Schedule Parameters</button>
+</div>
+{{end}}
